@@ -16,10 +16,10 @@ ktorVersion = "2.1.0"
 moko = "0.13.1"
 datastore = "1.1.1"
 coil = "3.0.0-alpha06"
+#Napier log
 napier = "2.6.1"
 ktor = "2.3.7"
 sqlDelight = "2.0.1"
-
 #Koin version
 koinCore = "3.5.3"
 koinCompose = "1.1.5"
