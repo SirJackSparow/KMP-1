@@ -39,6 +39,10 @@ kotlin {
             implementation(libs.bundles.coil)
             //news
 
+            //koin
+            api(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.composeViewModel)
         }
 
         androidMain.dependencies {
