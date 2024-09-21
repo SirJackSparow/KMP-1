@@ -1,6 +1,11 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.buildKonfig)
     kotlin("plugin.serialization") version "2.0.0"
 }
 
@@ -32,7 +37,7 @@ kotlin {
             //put your multiplatform dependencies here
             implementation(libs.kotlinx.datetime)
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-            implementation("io.ktor:ktor-client-core:$ktorVersion")
+            implementation(libs.bundles.ktor)
             implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
             //coil
@@ -43,6 +48,9 @@ kotlin {
             api(libs.koin.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.composeViewModel)
+
+            //napier
+            api(libs.napier)
         }
 
         androidMain.dependencies {
@@ -68,4 +76,22 @@ android {
     defaultConfig {
         minSdk = 24
     }
+}
+
+buildkonfig {
+    packageName = "com.example.cleanarchitecturekmm2024"
+    defaultConfigs {
+        buildConfigField(
+            STRING,
+            "API_KEY",
+            gradleLocalProperties(rootDir).getProperty("api_key") ?: ""
+        )
+        buildConfigField(
+            STRING,
+            "BASE_URL",
+            gradleLocalProperties(rootDir).getProperty("base_url") ?: ""
+        )
+
+    }
+
 }
